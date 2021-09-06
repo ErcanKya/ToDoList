@@ -1,4 +1,11 @@
 package com.example.toDoListBackend.repository;
 
-public class UserRepository {
+import com.example.toDoListBackend.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends MongoRepository<User, Long> {
+	User findByEmail(String email);
+	User findByUsername(String username);
 }
