@@ -45,7 +45,7 @@ const NavigationBar = () => {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Link to={auth.isLoggedIn ? "home" : ""} className="navbar-brand">
+      <Link to={auth.isLoggedIn ? "home" : "login"} className="navbar-brand">
         <img
           src="https://cdn.jim-nielsen.com/watchos/512/complete-to-do-list-task-grocery-list-reminder-2018-08-27.png"
           width="25"

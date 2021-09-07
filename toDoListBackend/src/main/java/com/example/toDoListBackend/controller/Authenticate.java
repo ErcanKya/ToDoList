@@ -5,6 +5,7 @@ import com.example.toDoListBackend.model.User;
 import com.example.toDoListBackend.repository.RoleRepository;
 import com.example.toDoListBackend.repository.UserRepository;
 import com.example.toDoListBackend.utils.ConstantUtils;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,7 +52,7 @@ public class Authenticate {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             user.setRole(roleRepository.findByName(ConstantUtils.USER.toString()));
             User savedUser = userRepository.save(user);
-            jsonObject.put("message", savedUser.getUsername() + " saved succesfully");
+            jsonObject.put("message", savedUser.getName() + " saved succesfully");
             return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
         } catch (JSONException e) {
             try {
@@ -64,7 +66,7 @@ public class Authenticate {
 
     @PostMapping(value = "/authenticate", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> authenticate(@RequestBody User user) {
-        log.info("UserResourceImpl : authenticate");
+        log.info("Authenticate : authenticate");
         JSONObject jsonObject = new JSONObject();
         try {
             Authentication authentication = authenticationManager

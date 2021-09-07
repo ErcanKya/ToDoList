@@ -7,7 +7,7 @@ class CatchError extends Component {
     }
 
     reroute = async () => {
-        this.props.history.push('/');
+        this.props.history.push('/login');
     }
     
     render() {

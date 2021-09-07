@@ -3,6 +3,7 @@ package com.example.toDoListBackend.service.Impl;
 import com.example.toDoListBackend.model.ToDo;
 import com.example.toDoListBackend.repository.ToDoRepository;
 import com.example.toDoListBackend.service.IToDoService;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class IToDoServiceImpl implements IToDoService<ToDo> {
         JSONObject jsonObject = new JSONObject();
         try {
             toDoRepository.deleteById(id);
-            jsonObject.put("message", "Book deleted successfully");
+            jsonObject.put("message", "Task deleted successfully");
         } catch (JSONException e) {
             e.printStackTrace();
         }

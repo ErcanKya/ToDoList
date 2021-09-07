@@ -1,9 +1,12 @@
 package com.example.toDoListBackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -12,7 +15,12 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
 public class ToDo {
     @Id
+    @Field("_id")
+    @JsonIgnore
     private String id;
+
+    @Field("Todo_id")
+    private String Todo_id;
     @NotBlank
     @Size(max=100)
     @Indexed(unique=true)
@@ -31,6 +39,14 @@ public class ToDo {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTodo_id() {
+        return Todo_id;
+    }
+
+    public void setTodo_id(String todo_id) {
+        Todo_id = todo_id;
     }
 
     public String getTitle() {

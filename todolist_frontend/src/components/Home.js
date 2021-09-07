@@ -78,7 +78,7 @@ class Home extends Component {
       .catch((error) => {
         console.log(error);
         localStorage.removeItem("jwtToken");
-        this.props.history.push("/");
+        this.props.history.push("/login");
       });
   }
 

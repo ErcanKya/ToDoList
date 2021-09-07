@@ -24,7 +24,6 @@ const Login = (props) => {
   const [show, setShow] = useState(true);
 
   const initialState = {
-    username:"",
     email: "",
     password: "",
   };
@@ -39,10 +38,10 @@ const Login = (props) => {
   const dispatch = useDispatch();
 
   const validateUser = () => {
-    dispatch(authenticateUser(user.email, user.password))
+    dispatch(authenticateUser(user.email , user.password))
       .then((response) => {
         console.log(response.data);
-        return props.history.push("/home");
+        return props.history.push("/");
       })
       .catch((error) => {
         console.log(error.message);
@@ -122,7 +121,7 @@ const Login = (props) => {
               size="sm"
               type="button"
               variant="success"
-              onClick={props.history.push("/home")}
+              onClick={validateUser}
               disabled={user.email.length === 0 || user.password.length === 0}
             >
               <FontAwesomeIcon icon={faSignInAlt} /> Login

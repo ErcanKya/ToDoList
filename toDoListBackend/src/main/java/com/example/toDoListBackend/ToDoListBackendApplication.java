@@ -46,6 +46,7 @@ public class ToDoListBackendApplication implements CommandLineRunner {
 
 		if (userIService.findAll().isEmpty()) {
 			User user1 = new User();
+			user1.setName("test");
 			user1.setEmail("test@user.com");
 			user1.setUsername("Test User");
 			user1.setMobile("9787456545");
@@ -54,6 +55,7 @@ public class ToDoListBackendApplication implements CommandLineRunner {
 			userIService.saveOrUpdate(user1);
 
 			User user2 = new User();
+			user2.setName("test2");
 			user2.setEmail("test@admin.com");
 			user2.setUsername("Test Admin");
 			user2.setMobile("9787456545");

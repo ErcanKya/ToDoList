@@ -1,7 +1,7 @@
 import * as UT from "./userTypes";
 import axios from "axios";
 
-const REGISTER_URL = "http://localhost:8081/rest/user/register";
+const REGISTER_URL = "http://localhost:8081/user/register";
 
 export const fetchUsers = () => {
   return (dispatch) => {
