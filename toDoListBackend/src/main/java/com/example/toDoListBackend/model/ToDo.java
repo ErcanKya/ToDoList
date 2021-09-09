@@ -1,52 +1,27 @@
 package com.example.toDoListBackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import javax.persistence.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.Date;
-
-@Document(collection = "todos")
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
+@Entity
+@Table(name = "tbl_todos")
 public class ToDo {
     @Id
-    @Field("_id")
-    @JsonIgnore
-    private String id;
+    @GeneratedValue
+    private Long id;
 
-    @Field("Todo_id")
-    private String Todo_id;
-    @NotBlank
-    @Size(max=100)
-    @Indexed(unique=true)
     private String title;
 
+    @Column(nullable = false)
     private Boolean completed = false;
-    private Date createdAt = new Date();
 
-    public ToDo() {
-        super();
-    }
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTodo_id() {
-        return Todo_id;
-    }
-
-    public void setTodo_id(String todo_id) {
-        Todo_id = todo_id;
     }
 
     public String getTitle() {
@@ -65,13 +40,6 @@ public class ToDo {
         this.completed = completed;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
     @Override
     public String toString() {
         return String.format(

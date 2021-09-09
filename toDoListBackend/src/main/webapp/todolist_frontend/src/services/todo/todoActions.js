@@ -7,7 +7,7 @@ export const saveTodo = (todo) => {
       type: BT.SAVE_TODO_REQUEST,
     });
     axios
-      .post("http://localhost:8081/api/todos", todo)
+      .post("http://localhost:8081/rest/todos", todo)
       .then((response) => {
         dispatch(todoSuccess(response.data));
       })
@@ -23,7 +23,7 @@ export const fetchTodo = (todoId) => {
       type: BT.FETCH_TODO_REQUEST,
     });
     axios
-      .get("http://localhost:8081/api/todos/" + todoId)
+      .get("http://localhost:8081/rest/todos/" + todoId)
       .then((response) => {
         dispatch(todoSuccess(response.data));
       })
@@ -39,7 +39,7 @@ export const updateTodo = (todo) => {
       type: BT.UPDATE_TODO_REQUEST,
     });
     axios
-      .put("http://localhost:8081/api/todos", todo)
+      .put("http://localhost:8081/rest/todos", todo)
       .then((response) => {
         dispatch(todoSuccess(response.data));
       })
@@ -55,7 +55,7 @@ export const deleteTodo = (todoId) => {
       type: BT.DELETE_TODO_REQUEST,
     });
     axios
-      .delete("http://localhost:8081/api/todos/" + todoId)
+      .delete("http://localhost:8081/rest/todos/" + todoId)
       .then((response) => {
         dispatch(todoSuccess(response.data));
       })

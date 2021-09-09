@@ -1,11 +1,15 @@
 package com.example.toDoListBackend.repository;
 
+
 import com.example.toDoListBackend.model.Role;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface RoleRepository extends MongoRepository<Role, Long> {
-	Role findByName(String name);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+
+	@Query("FROM Role WHERE name=:name")
+	Role findByName(@Param("name") String name);
 }

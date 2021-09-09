@@ -48,7 +48,6 @@ public class ToDoListBackendApplication implements CommandLineRunner {
 			User user1 = new User();
 			user1.setName("test");
 			user1.setEmail("test@user.com");
-			user1.setUsername("Test User");
 			user1.setMobile("9787456545");
 			user1.setRole(roleService.findByName(ConstantUtils.USER.toString()));
 			user1.setPassword(new BCryptPasswordEncoder().encode("testuser"));
@@ -57,7 +56,6 @@ public class ToDoListBackendApplication implements CommandLineRunner {
 			User user2 = new User();
 			user2.setName("test2");
 			user2.setEmail("test@admin.com");
-			user2.setUsername("Test Admin");
 			user2.setMobile("9787456545");
 			user2.setRole(roleService.findByName(ConstantUtils.ADMIN.toString()));
 			user2.setPassword(new BCryptPasswordEncoder().encode("testadmin"));
@@ -68,7 +66,6 @@ public class ToDoListBackendApplication implements CommandLineRunner {
 			ToDo toDo=new ToDo();
 			toDo.setTitle("First Task 'Do It'");
 			toDo.setCompleted(false);
-			toDo.getCreatedAt();
 			toDoService.saveOrUpdate(toDo);
 			System.out.println("ADDED");
 		}

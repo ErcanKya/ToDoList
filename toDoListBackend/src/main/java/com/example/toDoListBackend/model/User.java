@@ -1,52 +1,33 @@
 package com.example.toDoListBackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
+import javax.persistence.*;
 import java.util.Date;
 
-@Document(collection = "users")
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
+@Entity
+@Table(name = "tbl_user")
 public class User {
 	@Id
-	@Field("_id")
-	@JsonIgnore
-	private String id;
-
-	@Field("user_id")
-	private Long user_id;
+	@GeneratedValue
+	private Long id;
+	@Column(nullable = false)
 	private String name;
-	private String username;
-	private String password;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String mobile;
-
-	private Date createdAt = new Date();
-
+	@Column(nullable = false)
+	private String password;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
 	private Role role;
 
-	public User() {
-		super();
-	}
-
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(Long user_id) {
-		this.user_id = user_id;
 	}
 
 	public String getName() {
@@ -55,22 +36,6 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getEmail() {
@@ -89,12 +54,12 @@ public class User {
 		this.mobile = mobile;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Role getRole() {
@@ -104,4 +69,5 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 }

@@ -38,10 +38,10 @@ const Login = (props) => {
   const dispatch = useDispatch();
 
   const validateUser = () => {
-    dispatch(authenticateUser(user.email , user.password))
+    dispatch(authenticateUser(user.email, user.password))
       .then((response) => {
         console.log(response.data);
-        return props.history.push("/");
+        return props.history.push("/home");
       })
       .catch((error) => {
         console.log(error.message);

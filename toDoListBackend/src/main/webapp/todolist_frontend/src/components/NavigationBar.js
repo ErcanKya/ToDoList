@@ -34,9 +34,18 @@ const NavigationBar = () => {
   const userLinks = (
     <>
       <Nav className="mr-auto">
+        <Link to={"add"} className="nav-link">
+          Add
+        </Link>
+        <Link to={"list"} className="nav-link">
+          List
+        </Link>
+        <Link to={"users"} className="nav-link">
+          User List
+        </Link>
       </Nav>
       <Nav className="navbar-right">
-        <Link to={"logout"} className="nav-link" onClick={logout}>
+        <Link to={"login"} className="nav-link" onClick={logout}>
           <FontAwesomeIcon icon={faSignOutAlt} /> Logout
         </Link>
       </Nav>
@@ -45,16 +54,16 @@ const NavigationBar = () => {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Link to={auth.isLoggedIn ? "home" : "login"} className="navbar-brand">
+      <Link to={auth.isLoggedIn ? "home" : ""} className="navbar-brand">
         <img
-          src="https://cdn.jim-nielsen.com/watchos/512/complete-to-do-list-task-grocery-list-reminder-2018-08-27.png"
+          src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Book_icon_1.png"
           width="25"
           height="25"
           alt="brand"
         />{" "}
         To Do List
       </Link>
-      {auth.isLoggedIn ? userLinks:guestLinks  }
+      {auth.isLoggedIn ? userLinks : guestLinks}
     </Navbar>
   );
 };

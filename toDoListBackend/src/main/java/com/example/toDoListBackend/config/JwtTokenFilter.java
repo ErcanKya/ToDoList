@@ -53,7 +53,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 				return;
 			}
 		} else {
-			log.info("first time so creating token using Authenticate - authenticate method");
+			log.info("first time so creating token using UserResourceImpl - authenticate method");
 		}
 		filterChain.doFilter(request, response);
 	}

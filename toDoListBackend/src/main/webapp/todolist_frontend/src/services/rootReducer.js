@@ -5,8 +5,8 @@ import todoReducer from "./todo/todoReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
-  todo: todoReducer,
   auth: authReducer,
+  todo: todoReducer,
 });
 
 export default rootReducer;

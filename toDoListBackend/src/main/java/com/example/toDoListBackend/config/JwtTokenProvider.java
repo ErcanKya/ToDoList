@@ -6,8 +6,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,15 +18,12 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
-@Configuration
-@PropertySource("classpath:application.properties")
 public class JwtTokenProvider implements Serializable {
 
-	private static final long serialVersionUID = 2569455441756370776L;
+	private static final long serialVersionUID = 2569800841756370596L;
 
-	@Value("${jwtSecret}")
+	@Value("${jwt.secret-key}")
 	private String secretKey;
-
 
 	@PostConstruct
 	protected void init() {

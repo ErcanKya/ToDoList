@@ -29,7 +29,7 @@ public class UserServiceImpl implements IService<User> {
 
 	@Override
 	public User saveOrUpdate(User user) {
-		return userRepository.save(user);
+		return userRepository.saveAndFlush(user);
 	}
 
 	@Override

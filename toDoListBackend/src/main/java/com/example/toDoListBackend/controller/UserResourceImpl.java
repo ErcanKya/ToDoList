@@ -18,19 +18,19 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:3000")
-public class Authenticate {
+public class UserResourceImpl {
 
-    private static Logger log = LoggerFactory.getLogger(Authenticate.class);
+    private static Logger log = LoggerFactory.getLogger(UserResourceImpl.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -46,12 +46,12 @@ public class Authenticate {
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> register(@RequestBody User user) {
-        log.info("Authenticate : register");
+        log.info("UserResourceImpl : register");
         JSONObject jsonObject = new JSONObject();
         try {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             user.setRole(roleRepository.findByName(ConstantUtils.USER.toString()));
-            User savedUser = userRepository.save(user);
+            User savedUser = userRepository.saveAndFlush(user);
             jsonObject.put("message", savedUser.getName() + " saved succesfully");
             return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
         } catch (JSONException e) {
@@ -66,16 +66,15 @@ public class Authenticate {
 
     @PostMapping(value = "/authenticate", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> authenticate(@RequestBody User user) {
-        log.info("Authenticate : authenticate");
+        log.info("UserResourceImpl : authenticate");
         JSONObject jsonObject = new JSONObject();
         try {
-            Authentication authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+            Authentication authentication = (new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
             if (authentication.isAuthenticated()) {
                 String email = user.getEmail();
                 jsonObject.put("name", authentication.getName());
                 jsonObject.put("authorities", authentication.getAuthorities());
-                jsonObject.put("token", tokenProvider.createToken(email, userRepository.findByEmail(email).getRole()));
+                jsonObject.put("token", tokenProvider.createToken(email, (userRepository.findByEmail(email)).getRole()));
                 return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
             }
         } catch (JSONException e) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Optional;
 
+
 @Service
 public class IToDoServiceImpl implements IToDoService<ToDo> {
 
@@ -24,7 +25,7 @@ public class IToDoServiceImpl implements IToDoService<ToDo> {
     }
 
     @Override
-    public Optional<ToDo> findById(Long id) {
+    public Optional<ToDo> findById(String id) {
         return toDoRepository.findById(id);
     }
 
@@ -34,11 +35,11 @@ public class IToDoServiceImpl implements IToDoService<ToDo> {
     }
 
     @Override
-    public String deleteById(Long id) {
+    public String deleteById(String id) {
         JSONObject jsonObject = new JSONObject();
         try {
             toDoRepository.deleteById(id);
-            jsonObject.put("message", "Task deleted successfully");
+            jsonObject.put("message", "deleted successfully");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -2,7 +2,6 @@ package com.example.toDoListBackend.service.Impl;
 
 import com.example.toDoListBackend.model.User;
 import com.example.toDoListBackend.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
